@@ -69,31 +69,31 @@
   });
   /* review sec start sec end */
   
-  /* counter */
-  $('.counter-box[data-countdown]').each(function() {
-    var $this = $(this), countdownDate = $(this).data('countdown');
-    $this.countdown(countdownDate, function(event) {
-      var $this = $(this).html(event.strftime(''
-      + '<li class="days"><strong class="day2">%D</strong><span class="d-block">Days</span></li>'
-      + '<li class="hours"><strong class="hours2">%H</strong><span class="d-block">Hours</span></li>'
-      + '<li class="minutes"><strong class="min2">%M</strong><span class="d-block">Minutes</span></li>'
-      + '<li class="seconds"><strong class="sec2">%S</strong><span class="d-block">Seconds</span></li>'));
-    }).on('finish.countdown', function() {
-      alert("Today's the Day!");
-    });
-  });
+  // /* counter */
+  // $('.counter-box[data-countdown]').each(function() {
+  //   var $this = $(this), countdownDate = $(this).data('countdown');
+  //   $this.countdown(countdownDate, function(event) {
+  //     var $this = $(this).html(event.strftime(''
+  //     + '<li class="days"><strong class="day2">%D</strong><span class="d-block">Days</span></li>'
+  //     + '<li class="hours"><strong class="hours2">%H</strong><span class="d-block">Hours</span></li>'
+  //     + '<li class="minutes"><strong class="min2">%M</strong><span class="d-block">Minutes</span></li>'
+  //     + '<li class="seconds"><strong class="sec2">%S</strong><span class="d-block">Seconds</span></li>'));
+  //   }).on('finish.countdown', function() {
+  //     alert("Today's the Day!");
+  //   });
+  // });
   
-  // Add event listener to update countdown on input change
-  var countdownDateInput = document.getElementById("countdown-date");
-  var countdownUl = document.querySelector(".counter-box");
+  // // Add event listener to update countdown on input change
+  // var countdownDateInput = document.getElementById("countdown-date");
+  // var countdownUl = document.querySelector(".counter-box");
   
-  countdownDateInput.addEventListener("input", function() {
-    var countdownDate = countdownDateInput.value;
-    countdownUl.setAttribute("data-countdown", countdownDate);
-    // Restart countdown with new date
-    $('.counter-box[data-countdown]').countdown(countdownDate);
-  });
-  /* counter */
+  // countdownDateInput.addEventListener("input", function() {
+  //   var countdownDate = countdownDateInput.value;
+  //   countdownUl.setAttribute("data-countdown", countdownDate);
+  //   // Restart countdown with new date
+  //   $('.counter-box[data-countdown]').countdown(countdownDate);
+  // });
+  // /* counter */
  
       
   $(document).on( 'click', '.mode', function(e){
