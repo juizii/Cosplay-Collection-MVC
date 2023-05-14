@@ -35,7 +35,7 @@ module.exports = {
         title: req.body.title,
         image: result.secure_url,
         cloudinaryId: result.public_id,
-        caption: req.body.caption,
+        media: req.body.media,
         likes: 0,
         user: req.user.id,
       });
@@ -59,6 +59,65 @@ module.exports = {
       console.log(err);
     }
   },
+  editPost: async (req, res) => {
+    try {
+      console.log(req.body);
+      console.log(req.file);
+  
+      if (req.file) {
+        const result = await cloudinary.uploader.upload(req.file.path);
+        await Post.findOneAndUpdate(
+          { _id: req.params.id },
+          {
+            $set: {  
+              title: req.body.title,
+              image: result.secure_url,
+              cloudinaryId: result.public_id,
+              media: req.body.media
+            },
+          }
+        );
+      } else {
+        await Post.findOneAndUpdate(
+          { _id: req.params.id },
+          {
+            $set: {  
+              title: req.body.title,
+              media: req.body.media
+            },
+          }
+        );
+      }
+      console.log("Successfully Edited!");
+      res.redirect(`/profile`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  //   try {
+  //     let post = await Post.findById(req.params.id);
+  //     if (!post) {
+  //       res.redirect("/profile");
+  //       return;
+  //     }
+  //     if (req.file) {
+  //       // Delete old image from cloudinary
+  //       await cloudinary.uploader.destroy(post.cloudinaryId);
+  //       // Upload new image to cloudinary
+  //       const result = await cloudinary.uploader.upload(req.file.path);
+  //       post.image = result.secure_url;
+  //       post.cloudinaryId = result.public_id;
+  //     }
+  //     post.title = req.body.title;
+  //     post.media = req.body.media;
+  //     await post.save();
+  //     console.log("Post has been updated!");
+  //     res.redirect("/profile");
+  //   } catch (err) {
+  //     console.log(err);
+  //     res.redirect("/profile");
+  //   }
+  // },
   deletePost: async (req, res) => {
     try {
       // Find post by id

@@ -1,46 +1,47 @@
 <%- include('partials/header') -%>
 
-  <!-- info sec start -->
-  <div class="info-sec" >
-    <div class="container">
-     
-      <div class="info-countdown"  style="background-image: url(assets/images/banner/bg.png);">
-       <div class="section-head col-xl-9 m-auto text-center mb-5">
-          <span class="label" id ="countdown">Start the Countdown</span>
-       </div>
-        <form id="countdown">
-          <label for="countdown-date">Enter the date for your next con: </label>
-          <input type="date" id="countdown-date" name="countdown-date" required >
-          <ul class="counter-box d-flex justify-content-around" data-countdown="">
-          </ul>
-        </form>
-          
-          <div class="dots img-moving-anim2">
-             <img src="assets/images/dots/dots3.png" alt="Shadow Image">
-          </div>
-       </div>
-    
-    </div>
- </div>
- <!-- info sec end -->
- 
- <!-- about sec start -->
- <section id="about" class="about-sec">
-   
-    <div class="container">
-       <div class="dots img-moving-anim5">
-          <img src="assets/images/dots/dots4.png" alt="Shape Images">
-       </div>
-       <div class="section-head col-xl-9 m-auto text-center mb-5">
-          <span class="label">Welcome to Cosplay Collection</span>
-          <h1 class="title mb-4">
-             Here you can add your latest cosplay projects and organize all your references and links
-          </h1>
-          <p class="desc mx-3">
-             Brought to you by Joyce Zhang, a software developer from Resilient Coders and an avid lover of arts and this craft. Made to make every cosplayer's con prep just a little easier.
-          </p>
-       </div>
-       <!-- <div class="about-items-wrap" data-aos="fade-right" data-aos-duration="1000">
+   <!-- info sec start -->
+   <div class="info-sec">
+      <div class="container">
+
+         <div class="info-countdown" style="background-image: url(assets/images/banner/bg.png);">
+            <div class="section-head col-xl-9 m-auto text-center mb-5">
+               <span class="label" id="countdown">Start the Countdown</span>
+            </div>
+            <form id="countdown">
+               <label for="countdown-date" class="title">Enter the date for your next con: </label>
+               <input type="date" id="countdown-date" name="countdown-date" required>
+               <ul class="counter-box d-flex justify-content-around" data-countdown="">
+               </ul>
+            </form>
+
+            <div class="dots img-moving-anim2">
+               <img src="assets/images/dots/dots3.png" alt="Shadow Image">
+            </div>
+         </div>
+
+      </div>
+   </div>
+   <!-- info sec end -->
+
+   <!-- about sec start -->
+   <section id="about" class="about-sec">
+
+      <div class="container">
+         <div class="dots img-moving-anim5">
+            <img src="assets/images/dots/dots4.png" alt="Shape Images">
+         </div>
+         <div class="section-head col-xl-9 m-auto text-center mb-5">
+            <span class="label">Welcome to Cosplay Collection</span>
+            <h1 class="title mb-4">
+               Here you can add your latest cosplay projects and organize all your references and links
+            </h1>
+            <p class="desc mx-3">
+               Brought to you by Joyce Zhang, a software developer from Resilient Coders and an avid lover of arts and
+               this craft. Made to make every cosplayer's con prep just a little easier.
+            </p>
+         </div>
+         <!-- <div class="about-items-wrap" data-aos="fade-right" data-aos-duration="1000">
           <div class="row g-4">
              <div class="col-lg-6" data-aos="fade-right" data-aos-duration="800">
                 <div class="about-item">
@@ -85,370 +86,411 @@
                    </div> 
                 </div>
              </div> -->
-             <!-- <div class="dots img-moving-anim5">
+         <!-- <div class="dots img-moving-anim5">
                 <img src="assets/images/dots/dots4.png" alt="Shape Images">
              </div> -->
-          <!-- </div>
+         <!-- </div>
        </div>
     </div> -->
-    <!-- <div class="shape">
+         <!-- <div class="shape">
        <img src="assets/images/shape/1.svg" alt="Shadow">
     </div> -->
- </section>
- <!-- about sec end -->
- <div class="container mt-5">
-    <hr>
- </div>
- 
- <!-- speakers sec end -->
+   </section>
+   <!-- about sec end -->
+   <div class="container mt-5">
+      <hr>
+   </div>
 
- <section id="speakers" class="speakers-gallery-sec position-relative">
-   <div class="container">
-      <div class="section-head col-xl-8 m-auto text-center mb-5">
-         <span class="label">Create a new Character Project</span>
-         <h2 class="title">
-            Here is where you can add your next character to list of cosplays.
-         </h2>
+   <!-- speakers sec end -->
+
+   <section id="speakers" class="speakers-gallery-sec position-relative">
+      <div class="container">
+         <div class="section-head col-xl-8 m-auto text-center mb-5">
+            <span class="label">Create a new Character Project</span>
+            <h2 class="title">
+               Here is where you can add your next character to list of cosplays.
+            </h2>
+         </div>
+         <div class="speakers-gallery-items-wrap">
+
+            <div class="row">
+               <% for(var i=0; i<posts.length; i++) {%>
+                  <div class="col-md-6 col-lg-4 col-xl-3">
+                     <div class="speakers-gallery-item" data-aos="fade-up" data-aos-easing="linear"
+                        data-aos-duration="500">
+
+                        <div class="speakers-gallery-item-thumb overflow-hidden position-relative">
+                           <img class="img-fluid" src="<%= posts[i].image%>">
+                        </div>
+                        <ul class="social-icons social">
+                           <li>
+                              <a href="/post/<%= posts[i]._id%>">Work</a>
+                           </li>
+                           <li>
+                              <a href="/post/editPost/<%= posts[i]._id%>" data-bs-toggle="modal"
+                                 data-bs-target="#exampleModal">Edit</a>
+                           </li>
+                           <li>
+                              <!-- use the delete method in the url in order to delete post; overrides the method of post to delete -->
+                              <form action="/post/deletePost/<%= posts[i]._id %>?_method=DELETE" method="POST">
+                                 <a><button type="submit" class="delete-btn"><i class="fa fa-trash"
+                                          aria-hidden="true"></i></button></a>
+                              </form>
+                           </li>
+                        </ul>
+
+
+                        <div class="item-content">
+                           <h3 class="title">
+                              <%= posts[i].title %>
+                           </h3>
+                           <span class="sub">
+                              <%= posts[i].media %>
+                           </span>
+                        </div>
+
+                     </div>
+                  </div>
+                  <% } %>
+            </div>
+
+
+            <div class="dots img-moving-anim1">
+               <img src="assets/images/dots/dots8.png" alt="Shadow Image">
+            </div>
+         </div>
+         <div>
+            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+               <div class="mb-3">
+                  <label for="imgUpload" class="form-label">Image</label>
+                  <input type="file" class="form-control" id="imageUpload" name="file">
+               </div>
+               <div class="mb-3">
+                  <label for="title" class="form-label">Name</label>
+                  <input type="text" class="form-control" id="title" name="title">
+               </div>
+               <div class="mb-3">
+                  <label for="media" class="form-label">Media</label>
+                  <input type="text" class="form-control" id="media" name="media"></textarea>
+               </div>
+               <button type="submit" class="custom-btn custom-btn2" value="Upload">+ Speakers</button>
+            </form>
+         </div>
+
       </div>
-      <div class="speakers-gallery-items-wrap">
-        
-         <div class="row">
-            <% for(var i=0; i<posts.length; i++) {%>
-            <div class="col-md-6 col-lg-4 col-xl-3">
-               <div class="speakers-gallery-item" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="500">
-              
-                  <div class="speakers-gallery-item-thumb overflow-hidden position-relative">
-                    <img class="img-fluid" src="<%= posts[i].image%>">
+      <div class="shape">
+         <img src="assets/images/shape/3.svg" alt="">
+      </div>
+   </section>
+
+   <div class="container">
+      <hr>
+   </div>
+
+   
+      <!-- Modal 2 -->
+      <div class="modal  popup-box fade" id="exampleModal" tabindex="-1" aria-hidden="true">
+         <div class="modal-dialog popup-box-dialog modal-dialog-centered">
+            <div class="modal-content popup-box-content">
+               <div class="popup-card" style="width:100%">
+                  <button type="button" class="btn popup2-btn  ms-auto" data-bs-dismiss="modal"><i
+                        class="fa-solid fa-xmark"></i></button>
+                  <img src="assets/images/popup.png" class="card-img-top" alt="popup-bg">
+                  <div class="card-body popup-card-body">
+                     <div class="popup-title-area">
+                        <p class="popup-sub">Made a mistake?</p>
+                        <h5 class="card-title popup-title">You can edit your character!</h5>
+                     </div>
                   </div>
-                  <ul class="social-icons social">
-                     <li>
-                        <a href="/post/<%= posts[i]._id%>">Work</a>
-                     </li>
-                     <li>
-                        <a href="">Edit</a>
-                     </li>
-                     <li>
-                        <a href=""><i class="fa fa-trash" aria-hidden="true"></i></a>
-                     </li>
-                  </ul>
-                  <div class="item-content">
-                     <h3 class="title"><%= posts[i].title %></h3>
-                     <span class="sub"><%= posts[i].caption %></span>
-                  </div>
-              
+                  <% for(var i=0; i< posts.length; i++) {%>
+                     <form action="/post/editPost/<%= posts[i]._id %>?_method=PUT" class="popup-form" enctype="multipart/form-data" method="POST">
+                        <div class="row gy-3 mb-3">
+                           <div class="col-lg-6">
+                              <label for="exampleFormControlInput5" class="form-label">Image</label>
+                              <input type="file" class="form-control" id="exampleFormControlInput5" placeholder="New Image" name="image" value="<%= posts[i].image %>">
+                              <div class="col-lg-6">
+                                 <label for="exampleFormControlInput6" class="form-label">Name</label>
+                                 <input type="text" class="form-control" id="exampleFormControlInput6" placeholder="New Name" name="title" value="<%= posts[i].title %>">
+                              </div>
+                              <div class="col-lg-6">
+                                 <label for="exampleFormControlInput7" class="form-label">Media</label>
+                                 <input type="text" class="form-control" id="exampleFormControlInput7" placeholder="New Media" name="media" value="<%= posts[i].media %>">
+                              </div>
+                           </div>
+                           <button class="custom-btn2" type="submit">Save Changes</button>
+                        </div>
+                     </form>
+                  <% } %>
                </div>
             </div>
-            <% } %>
-         </div>
-         
-       
-         <div class="dots img-moving-anim1">
-            <img src="assets/images/dots/dots8.png" alt="Shadow Image">
          </div>
       </div>
-      <div>
-         <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-            <div class="mb-3">
-               <label for="imgUpload" class="form-label">Image</label>
-               <input type="file" class="form-control" id="imageUpload" name="file">
-             </div>
-           <div class="mb-3">
-               <label for="title" class="form-label">Name</label>
-               <input type="text" class="form-control" id="title" name="title">
-           </div>
-           <div class="mb-3">
-             <label for="caption" class="form-label">Media</label>
-             <textarea class="form-control" id="caption" name="caption"></textarea>
-           </div>
-           <button type ="submit" class="custom-btn custom-btn2" value = "Upload">+ Speakers</button>
-         </form>
-       </div>
+      </div>
 
+
+   <!-- video sec start -->
+   <section class="video-sec" data-src="assets/images/banner/home-conference-video-bg.svg" data-parallax>
+      <div class="container">
+         <div class="row align-items-center">
+            <div class="col-lg-6">
+               <div class="video-wrap">
+                  <div class="video-image img-moving-anim1">
+                     <img src="assets/images/video/video1.jpg" alt="Video Image 1">
+                  </div>
+                  <div class="video-play">
+                     <img src="assets/images/video/video2.jpg" alt="Video Image 2" data-bs-backdrop="static">
+                     <a class="video-btn1 popup-video" href="" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop"><span><i class="fas fa-play"></i></span></a>
+                  </div>
+                  <div class="dots img-moving-anim2">
+                     <img src="assets/images/dots/dots6.png" alt="Shadow Image">
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-6">
+               <div class="video-content-wrap">
+                  <h2 class="title">
+                     Be inspired by expert speakers in design, video, and more
+                  </h2>
+                  <p class="desc">
+                     Plan your week to make the most of all the sessions and labs, Community Eventor activities, and fun
+                     ways to connect with other creatives.
+                     <br><br>
+                     Join us in person or attend virtually for free. Register now, in-person attendance is limited.
+                  </p>
+                  <div class="management d-flex">
+                     <h3 class="event count-block p-lg-5 p-3"><span>07</span>Days Event</h3>
+                     <h3 class="speakers count-block p-lg-5 p-3"><span>20+</span>Speakers</h3>
+                  </div>
+                  <div class="dots img-moving-anim3">
+                     <img src="assets/images/dots/dots7.png" alt="Shadow Image">
+                  </div>
+                  <button class="custom-btn2 video-btn">Resister Now</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!-- video sec end -->
+
+
+   <div class="container">
+      <hr>
    </div>
-   <div class="shape">
-      <img src="assets/images/shape/3.svg" alt="">
+
+
+
+   <div class="container">
+      <hr>
    </div>
-</section>
+   <!-- faq sec start -->
+   <section class="faq-sec">
+      <div class="container">
+         <div class="row align-items-end">
+            <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right" data-aos-duration="1000">
+               <div class="title-area">
+                  <h2 class="title mb-3">
+                     Frequently asked questions,
+                     about the conference
+                  </h2>
+                  <p class="desc mb-5">
+                     Eventor Collaborative, brought to you by IBM, is where the most inventive and forward-thinking
+                     nonprofit leaders come together
+                     to discover emerging trends in fundraising and technology.
+                  </p>
 
-<div class="container">
-   <hr>
-</div>
- 
+                  <button class="faq-btn custom-btn">Learn More</button>
+               </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000">
+               <div class="question-area">
+                  <div class="accordion" id="accordionExample">
+                     <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                           <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                              data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                              Is this Eventor Conference 2023 for me?
+                           </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                           data-bs-parent="#accordionExample">
+                           <div class="accordion-body">
+                              Are you a developer interested in building web applications and at the same time thinking
+                              about multiple parts of the stack needed to build them? Then this conference is for you.
+                              Many of the sessions either touch a specific concept or go about multiple parts of the
+                              stack.
+                           </div>
+                        </div>
+                     </div>
+                     <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                              data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                              Can I change the attendee name on the ticket?
+                           </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                           data-bs-parent="#accordionExample">
+                           <div class="accordion-body">
+                              Are you a developer interested in building web applications and at the same time thinking
+                              about multiple parts of the stack needed to build them? Then this conference is for you.
+                              Many of the sessions either touch a specific concept or go about multiple parts of the
+                              stack.
+                           </div>
+                        </div>
+                     </div>
+                     <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                              data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                              Can I change the attendee name on the ticket?
+                           </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                           data-bs-parent="#accordionExample">
+                           <div class="accordion-body">
+                              Are you a developer interested in building web applications and at the same time thinking
+                              about multiple parts of the stack needed to build them? Then this conference is for you.
+                              Many of the sessions either touch a specific concept or go about multiple parts of the
+                              stack.
+                           </div>
+                        </div>
+                     </div>
+                     <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFour">
+                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                              data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                              What is included in the ticket prices?
+                           </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                           data-bs-parent="#accordionExample">
+                           <div class="accordion-body">
+                              Are you a developer interested in building web applications and at the same time thinking
+                              about multiple parts of the stack needed to build them? Then this conference is for you.
+                              Many of the sessions either touch a specific concept or go about multiple parts of the
+                              stack.
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!-- faq sec end -->
+   <div class="container">
+      <hr>
+   </div>
 
- <!-- video sec start -->
- <section class="video-sec" data-src="assets/images/banner/home-conference-video-bg.svg" data-parallax>
-    <div class="container">
-       <div class="row align-items-center">
-          <div class="col-lg-6">
-             <div class="video-wrap">
-                <div class="video-image img-moving-anim1">
-                   <img src="assets/images/video/video1.jpg" alt="Video Image 1">
-                </div>
-                <div class="video-play">
-                   <img src="assets/images/video/video2.jpg" alt="Video Image 2"  data-bs-backdrop="static">
-                   <a class="video-btn1 popup-video" href=""  data-bs-toggle="modal" data-bs-target="#staticBackdrop"><span><i class="fas fa-play"></i></span></a>
-                </div>
-                <div class="dots img-moving-anim2">
-                   <img src="assets/images/dots/dots6.png" alt="Shadow Image">
-                </div>
-             </div>
-          </div>
-          <div class="col-lg-6">
-             <div class="video-content-wrap">
-                <h2 class="title">
-                   Be inspired by expert speakers in design, video, and more
-                </h2>
-                <p class="desc">
-                   Plan your week to make the most of all the sessions and labs, Community Eventor activities, and fun ways to connect with other creatives.
-                   <br><br>
-                   Join us in person or attend virtually for free. Register now, in-person attendance is limited.
-                </p>
-                <div class="management d-flex">
-                   <h3 class="event count-block p-lg-5 p-3"><span>07</span>Days Event</h3>
-                   <h3 class="speakers count-block p-lg-5 p-3"><span>20+</span>Speakers</h3>
-                </div>
-                <div class="dots img-moving-anim3">
-                   <img src="assets/images/dots/dots7.png" alt="Shadow Image">
-                </div>
-                <button class="custom-btn2 video-btn">Resister Now</button>
-             </div>
-          </div>
-       </div>
-    </div>
- </section>
- <!-- video sec end -->
- 
+   <!-- contact sec start -->
+   <section class="contact-sec" data-aos="zoom-in" data-aos-duration="1000">
+      <div class="container">
+         <div class="col-xl-5 section-head text-center m-auto mb-5">
+            <span class="label">Contact The Eventor Sales Team</span>
+            <h2 class="title mx-2">
+               We are here when you need us.
+               Need immediate assistance?
+            </h2>
+         </div>
+         <div class="contact-wrap bg-none p-0">
+            <div class="dots">
+               <img src="assets/images/dots/dots13.png" alt="Shadow Image" class="contact-dots-1 img-moving-anim2">
+            </div>
+            <div class="contact-wrap row py-4 px-3 contact align-items-center m-0">
+               <div class="col-lg-4">
+                  <div class="contact-thumb-wrap" style="background-image: url(assets/images/banner/contact-bg.png);">
+                     <div class="contact-content">
+                        <h5 class="title text-white">Contact Us</h5>
+                        <p class="desc">
+                           Get in touch and let us know how
+                           we can help.
+                        </p>
+                        <div class="info">
+                           <a class="icon d-block mb-3">
+                              <img src="assets/images/icon/mail1.svg" alt="Mail" style="color: #fff;">
+                              conference@eventor.com
+                           </a>
+                           <a class="location d-block mb-3">
+                              <img src="assets/images/icon/map-pin2.svg" alt="Map"> conference@eventor.com
+                           </a>
+                           <a class="phone d-block">
+                              <img src="assets/images/icon/phone3.svg" alt="Phone">
+                              conference@eventor.com
+                           </a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-lg-8 mt-4 mt-lg-0">
+                  <form class="contact-form" action>
+                     <div class="row gy-3">
+                        <div class="col-lg-6">
+                           <label for="exampleFormControlInput1" class="form-label">First Name</label>
+                           <input type="text" class="form-control" id="exampleFormControlInput1"
+                              placeholder="Your First Name" required>
+                        </div>
+                        <div class="col-lg-6">
+                           <label for="exampleFormControlInput2" class="form-label">Last Name</label>
+                           <input type="text" class="form-control" id="exampleFormControlInput2"
+                              placeholder="Your Last Name" required>
+                        </div>
+                        <div class="col-lg-6">
+                           <label for="exampleFormControlInput3" class="form-label">Email address</label>
+                           <input type="email" class="form-control" id="exampleFormControlInput3"
+                              placeholder="Enter Email" required>
+                        </div>
+                        <div class="col-lg-6">
+                           <label for="exampleFormControlInput4" class="form-label">Subject</label>
+                           <input type="text" class="form-control" id="exampleFormControlInput4"
+                              placeholder="Enter Subject" required>
+                        </div>
+                     </div>
+                     <div class="mb-3">
 
- <div class="container">
-    <hr>
- </div>
- 
+                     </div>
+                     <div class="text-area col-12 mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                           placeholder="Enter Your Comment"></textarea>
+                     </div>
+                     <button class=" custom-btn2" type="submit">Submit</button>
+                  </form>
+               </div>
+            </div>
 
+            <div class="dots">
+               <img src="assets/images/dots/dots14.png" alt="Shadow Image" class="contact-dots-2 img-moving-anim3">
+            </div>
+         </div>
+      </div>
+   </section>
+   <!-- contact sec end -->
+   <div class="container">
+      <hr>
+   </div>
 
- <div class="container">
-    <hr>
- </div>
- <!-- faq sec start -->
- <section class="faq-sec">
-    <div class="container">
-       <div class="row align-items-end">
-          <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right" data-aos-duration="1000">
-             <div class="title-area">
-                <h2 class="title mb-3">
-                   Frequently asked questions,
-                   about the conference
-                </h2>
-                <p class="desc mb-5">
-                   Eventor Collaborative, brought to you by IBM, is where the most inventive and forward-thinking nonprofit leaders come together
-                   to discover emerging trends in fundraising and technology.
-                </p>
-                
-                <button class="faq-btn custom-btn">Learn More</button>
-             </div>
-          </div>
-          <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000">
-             <div class="question-area">
-                <div class="accordion" id="accordionExample">
-                   <div class="accordion-item">
-                      <h2 class="accordion-header" id="headingOne">
-                         <button class="accordion-button" type="button"          data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Is this Eventor Conference 2023 for me?
-                         </button>
-                      </h2>
-                      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                         <div class="accordion-body">
-                            Are you a developer interested in building web applications and at the same time thinking about multiple parts of the stack needed to build them? Then this conference is for you. Many of the sessions either touch a specific concept or go about multiple parts of the stack.
-                         </div>
-                      </div>
-                   </div>
-                   <div class="accordion-item">
-                      <h2 class="accordion-header" id="headingTwo">
-                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Can I change the attendee name on the ticket?
-                         </button>
-                      </h2>
-                      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                         <div class="accordion-body">
-                            Are you a developer interested in building web applications and at the same time thinking about multiple parts of the stack needed to build them? Then this conference is for you. Many of the sessions either touch a specific concept or go about multiple parts of the stack.
-                         </div>
-                      </div>
-                   </div>
-                   <div class="accordion-item">
-                      <h2 class="accordion-header" id="headingThree">
-                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Can I change the attendee name on the ticket?
-                         </button>
-                      </h2>
-                      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                         <div class="accordion-body">
-                            Are you a developer interested in building web applications and at the same time thinking about multiple parts of the stack needed to build them? Then this conference is for you. Many of the sessions either touch a specific concept or go about multiple parts of the stack.
-                         </div>
-                      </div>
-                   </div>
-                   <div class="accordion-item">
-                      <h2 class="accordion-header" id="headingFour">
-                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                            What is included in the ticket prices?
-                         </button>
-                      </h2>
-                      <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-                         <div class="accordion-body">
-                            Are you a developer interested in building web applications and at the same time thinking about multiple parts of the stack needed to build them? Then this conference is for you. Many of the sessions either touch a specific concept or go about multiple parts of the stack.
-                         </div>
-                      </div>
-                   </div>
-                </div>
-             </div>
-          </div>
-       </div>
-    </div>
- </section>
- <!-- faq sec end -->
- <div class="container">
-    <hr>
- </div>
- 
- <!-- contact sec start -->
- <section class="contact-sec" data-aos="zoom-in" data-aos-duration="1000">
-    <div class="container">
-       <div class="col-xl-5 section-head text-center m-auto mb-5">
-          <span class="label">Contact The Eventor Sales Team</span>
-          <h2 class="title mx-2">
-             We are here when you need us.
-             Need immediate assistance?
-          </h2>
-       </div>
-       <div class="contact-wrap bg-none p-0">
-          <div class="dots">
-             <img src="assets/images/dots/dots13.png" alt="Shadow Image" class="contact-dots-1 img-moving-anim2">
-          </div>
-          <div class="contact-wrap row py-4 px-3 contact align-items-center m-0">
-             <div class="col-lg-4">
-                <div class="contact-thumb-wrap" style="background-image: url(assets/images/banner/contact-bg.png);">
-                   <div class="contact-content">
-                      <h5 class="title text-white">Contact Us</h5>
-                      <p class="desc">
-                         Get in touch and let us know how 
-                         we can help.
-                      </p>
-                      <div class="info">
-                         <a class="icon d-block mb-3">
-                            <img src="assets/images/icon/mail1.svg" alt="Mail" style="color: #fff;"> conference@eventor.com
-                         </a>
-                         <a class="location d-block mb-3">
-                            <img src="assets/images/icon/map-pin2.svg" alt="Map"> conference@eventor.com
-                         </a>
-                         <a class="phone d-block">
-                            <img src="assets/images/icon/phone3.svg" alt="Phone">
-                            conference@eventor.com
-                         </a>
-                      </div>
-                   </div>
-                </div>
-             </div>
-             <div class="col-lg-8 mt-4 mt-lg-0">
-                <form class="contact-form" action>
-                   <div class="row gy-3">
-                      <div class="col-lg-6">
-                         <label for="exampleFormControlInput1" class="form-label">First Name</label>
-                         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your First Name" required>
-                      </div>
-                      <div class="col-lg-6">
-                         <label for="exampleFormControlInput2" class="form-label">Last Name</label>
-                         <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="Your Last Name" required>
-                      </div>
-                      <div class="col-lg-6">
-                         <label for="exampleFormControlInput3" class="form-label">Email address</label>
-                         <input type="email" class="form-control" id="exampleFormControlInput3" placeholder="Enter Email" required>
-                      </div>
-                      <div class="col-lg-6">
-                         <label for="exampleFormControlInput4" class="form-label">Subject</label>
-                         <input type="text" class="form-control" id="exampleFormControlInput4" placeholder="Enter Subject" required>
-                      </div>
-                   </div>
-                   <div class="mb-3">
-                      
-                   </div>
-                   <div class="text-area col-12 mb-3">
-                      <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Your Comment" ></textarea>
-                   </div>
-                   <button class=" custom-btn2" type="submit">Submit</button>
-                </form>
-             </div>
-          </div>
-         
-          <div class="dots">
-             <img src="assets/images/dots/dots14.png" alt="Shadow Image" class="contact-dots-2 img-moving-anim3">
-          </div>
-       </div>
-    </div>
- </section>
- <!-- contact sec end -->
- <div class="container">
-    <hr>
- </div>
- 
- <!-- Modal -->
- <div class="modal fade popup-modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg popup-dialogue modal-dialog-centered">
-       <div class="modal-content popup-content p-4 bg-white">
-          <button type="button" class="btn btn-secondary  ms-auto" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i></button>
-          
-          <!-- <div class="modal-body popup-body">
+   <!-- Modal -->
+   <div class="modal fade popup-modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+      tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg popup-dialogue modal-dialog-centered">
+         <div class="modal-content popup-content p-4 bg-white">
+            <button type="button" class="btn btn-secondary  ms-auto" data-bs-dismiss="modal"><i
+                  class="fa-solid fa-xmark"></i></button>
+
+            <!-- <div class="modal-body popup-body">
              <iframe width="100%" height="400" src="https://www.youtube.com/embed/1dtzSRlfBDk" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div> -->
-          
-       </div>
-    </div>
- </div>
- 
- <!-- Button trigger modal -->
- 
- <!-- Modal 2 -->
- <div class="modal  popup-box fade" id="exampleModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog popup-box-dialog modal-dialog-centered">
-       <div class="modal-content popup-box-content">
-          <div class="popup-card" style="width:100%">
-             <button type="button" class="btn popup2-btn  ms-auto" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i></button>
-             <img src="assets/images/popup.png" class="card-img-top" alt="popup-bg">
-             <div class="card-body popup-card-body">
-                <div class="popup-title-area">
-                   <p class="popup-sub">October 2, 2023</p>
-                   <h5 class="card-title popup-title">Virtual sessions. Eventor Live@MAX</h5>
-                </div>
-                <a href="#" class="btn popup-play" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-play"></i></a>
-             </div>
-             <form action="#" class="popup-form">
-                <div class="row gy-3 mb-3">
-                   <div class="col-lg-6">
-                      <label for="exampleFormControlInput5" class="form-label">Full Name</label>
-                      <input type="text" class="form-control" id="exampleFormControlInput5" placeholder="Your Full Name" required>
-                   </div>
-                   <div class="col-lg-6">
-                      <label for="exampleFormControlInput6" class="form-label">Email</label>
-                      <input type="email" class="form-control" id="exampleFormControlInput6" placeholder="Enter Email" required>
-                   </div>
-                   <div class="col-lg-6">
-                      <label for="exampleFormControlInput7" class="form-label">Phone</label>
-                      <input type="text" class="form-control" id="exampleFormControlInput7" placeholder="Enter Phone" required>
-                   </div>
-                   <div class="col-lg-6">
-                      <label for="exampleFormControlInput8" class="form-label">Conference</label>
-                      <input type="text" class="form-control" id="exampleFormControlInput8" placeholder="Select Event" required>
-                   </div>
-                </div>
-                <button class="custom-btn2">Buy Now</button>
-             </form>
-          </div>
-       </div>
-    </div>
- </div>
- 
- 
- 
-</div>
-<!-- <div class="container">
+
+         </div>
+      </div>
+   </div>
+
+   <!-- Button trigger modal -->
+
+
+   <!-- <div class="container">
   <div class="row mt-5">
       <div class="col-6">
           <div>
@@ -493,4 +535,4 @@
   </div>
 </div> -->
 
-<%- include('partials/footer') -%>
+   <%- include('partials/footer') -%>
