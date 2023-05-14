@@ -128,7 +128,7 @@
                            </li>
                            <li>
                               <a href="/post/editPost/<%= posts[i]._id%>" data-bs-toggle="modal"
-                                 data-bs-target="#exampleModal">Edit</a>
+                                 data-bs-target="#exampleModal-<%= posts[i]._id %>">Edit</a>
                            </li>
                            <li>
                               <!-- use the delete method in the url in order to delete post; overrides the method of post to delete -->
@@ -189,7 +189,8 @@
 
    
       <!-- Modal 2 -->
-      <div class="modal  popup-box fade" id="exampleModal" tabindex="-1" aria-hidden="true">
+      <% for(let i=0; i < posts.length; i++) {%>
+         <div class="modal popup-box fade" id="exampleModal-<%= posts[i]._id %>" tabindex="-1" aria-hidden="true">
          <div class="modal-dialog popup-box-dialog modal-dialog-centered">
             <div class="modal-content popup-box-content">
                <div class="popup-card" style="width:100%">
@@ -202,8 +203,8 @@
                         <h5 class="card-title popup-title">You can edit your character!</h5>
                      </div>
                   </div>
-                  <% for(var i=0; i< posts.length; i++) {%>
-                     <form action="/post/editPost/<%= posts[i]._id %>?_method=PUT" class="popup-form" enctype="multipart/form-data" method="POST">
+               
+                  <form action="/post/editPost/<%= posts[i]._id %>?_method=PUT" class="popup-form" enctype="multipart/form-data" method="POST">
                         <div class="row gy-3 mb-3">
                            <div class="col-lg-6">
                               <label for="exampleFormControlInput5" class="form-label">Image</label>
@@ -220,12 +221,13 @@
                            <button class="custom-btn2" type="submit">Save Changes</button>
                         </div>
                      </form>
-                  <% } %>
+             
                </div>
             </div>
          </div>
       </div>
       </div>
+      <% } %>
 
 
    <!-- video sec start -->

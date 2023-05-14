@@ -59,65 +59,74 @@ module.exports = {
       console.log(err);
     }
   },
-  editPost: async (req, res) => {
-    try {
-      console.log(req.body);
-      console.log(req.file);
-  
-      if (req.file) {
-        const result = await cloudinary.uploader.upload(req.file.path);
-        await Post.findOneAndUpdate(
-          { _id: req.params.id },
-          {
-            $set: {  
-              title: req.body.title,
-              image: result.secure_url,
-              cloudinaryId: result.public_id,
-              media: req.body.media
-            },
-          }
-        );
-      } else {
-        await Post.findOneAndUpdate(
-          { _id: req.params.id },
-          {
-            $set: {  
-              title: req.body.title,
-              media: req.body.media
-            },
-          }
-        );
-      }
-      console.log("Successfully Edited!");
-      res.redirect(`/profile`);
-    } catch (err) {
-      console.log(err);
-    }
-  },
+  // editPost: async (req, res) => {
   //   try {
-  //     let post = await Post.findById(req.params.id);
-  //     if (!post) {
-  //       res.redirect("/profile");
-  //       return;
-  //     }
+  //     console.log(req.body);
+  //     console.log(req.file);
+  
   //     if (req.file) {
-  //       // Delete old image from cloudinary
-  //       await cloudinary.uploader.destroy(post.cloudinaryId);
-  //       // Upload new image to cloudinary
   //       const result = await cloudinary.uploader.upload(req.file.path);
-  //       post.image = result.secure_url;
-  //       post.cloudinaryId = result.public_id;
+  //       await Post.findOneAndUpdate(
+  //         { _id: req.params.id },
+  //         {
+  //           $set: {  
+  //             title: req.body.title,
+  //             image: result.secure_url,
+  //             cloudinaryId: result.public_id,
+  //             media: req.body.media
+  //           },
+  //         }
+  //       );
+  //     } else {
+  //       await Post.findOneAndUpdate(
+  //         { _id: req.params.id },
+  //         {
+  //           $set: {  
+  //             title: req.body.title,
+  //             media: req.body.media
+  //           },
+  //         }
+  //       );
   //     }
-  //     post.title = req.body.title;
-  //     post.media = req.body.media;
-  //     await post.save();
-  //     console.log("Post has been updated!");
-  //     res.redirect("/profile");
+  //     console.log("Successfully Edited!");
+  //     res.redirect(`/profile`);
   //   } catch (err) {
   //     console.log(err);
-  //     res.redirect("/profile");
   //   }
-  // },
+editPost: async (req, res) => {
+  try {
+    console.log(req.body);
+    console.log(req.file);
+
+    const post = await Post.findById(req.params.id);
+
+    if (req.file) {
+      // Upload new image to cloudinary
+      const result = await cloudinary.uploader.upload(req.file.path);
+
+      // Delete previous image from cloudinary
+      await cloudinary.uploader.destroy(post.cloudinaryId);
+
+      // Update post with new image and cloudinary ID
+      post.title = req.body.title;
+      post.image = result.secure_url;
+      post.cloudinaryId = result.public_id;
+      post.media = req.body.media;
+    } else {
+      // Update post without changing image
+      post.title = req.body.title;
+      post.media = req.body.media;
+    }
+
+    await post.save();
+
+    console.log("Successfully Edited!");
+    res.redirect(`/profile`);
+  } catch (err) {
+    console.log(err);
+  }
+},
+
   deletePost: async (req, res) => {
     try {
       // Find post by id

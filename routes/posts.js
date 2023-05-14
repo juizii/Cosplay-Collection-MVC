@@ -11,7 +11,7 @@ router.post("/createPost", upload.single("file"), postsController.createPost);
 
 router.put("/likePost/:id", postsController.likePost);
 
-router.put("/editPost/:id", upload.single("file"), postsController.editPost);
+router.put("/editPost/:id", upload.single("image"), postsController.editPost); //has to be the same name as the input to edit the image
 
 router.delete("/deletePost/:id", postsController.deletePost);
 
